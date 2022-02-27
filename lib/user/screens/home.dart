@@ -428,154 +428,119 @@ class _HomeWidgetState extends State<HomeWidget> {
                               )),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 10),
                           child: Text(
                             'Rencana liburan anda!',
                             style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 18,
-                            ),
+                                fontFamily: 'Poppins',
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Container(
-                          height: size.height * 0.3,
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              enlargeCenterPage: true,
-                              enableInfiniteScroll: false,
-                              autoPlay: false,
-                            ),
-                            items: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 2,
-                                      offset: Offset(
-                                          0, 0), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: size.height * 0.2,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                                          color: Colors.black,
-                                          image: DecorationImage(
-                                            image: AssetImage("assets/image/pantai-teluk.jpg"),
-                                            fit: BoxFit.cover 
-                                          )
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.all(10),
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          "Pantai Teluk Asmara",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 2,
-                                      offset: Offset(
-                                          0, 0), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: size.height * 0.2,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                                          color: Colors.black,
-                                          image: DecorationImage(
-                                            image: AssetImage("assets/image/pantai-teluk.jpg"),
-                                            fit: BoxFit.cover 
-                                          )
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.all(10),
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          "Pantai Teluk Asmara",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 2,
-                                      offset: Offset(
-                                          0, 0), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: size.height * 0.2,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                                          color: Colors.black,
-                                          image: DecorationImage(
-                                            image: AssetImage("assets/image/pantai-teluk.jpg"),
-                                            fit: BoxFit.cover 
-                                          )
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.all(10),
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          "Pantai Teluk Asmara",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            height: 180,
+                            aspectRatio: 16 / 9,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            enlargeCenterPage: true,
+                            enableInfiniteScroll: true,
+                            autoPlay: true,
+                            viewportFraction: 0.8,
                           ),
-                        )
+                          items: [
+                            Container(
+                                margin: EdgeInsets.all(5),
+                                width: size.width * 1,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/image/pantai-teluk.jpg"),
+                                        fit: BoxFit.cover)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "Pantai Teluk Asmara",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            shadows: [
+                                              Shadow(
+                                                offset: Offset(0, 0),
+                                                blurRadius: 5,
+                                                color: Color.fromARGB(
+                                                    255, 0, 0, 0),
+                                              ),
+                                            ]),
+                                      )
+                                    ],
+                                  ),
+                                ))
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 10),
+                          child: Text(
+                            'Destinasi Populer',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            height: 180,
+                            aspectRatio: 16 / 9,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            enlargeCenterPage: true,
+                            enableInfiniteScroll: true,
+                            autoPlay: true,
+                            viewportFraction: 0.8,
+                          ),
+                          items: [
+                            Container(
+                                margin: EdgeInsets.all(5),
+                                width: size.width * 1,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/image/pantai-teluk.jpg"),
+                                        fit: BoxFit.cover)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "Pantai Teluk Asmara",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            shadows: [
+                                              Shadow(
+                                                offset: Offset(0, 0),
+                                                blurRadius: 5,
+                                                color: Color.fromARGB(
+                                                    255, 0, 0, 0),
+                                              ),
+                                            ]),
+                                      )
+                                    ],
+                                  ),
+                                ))
+                          ],
+                        ),
                       ],
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inmalang/user/screens/home.dart';
+import 'package:inmalang/user/screens/navigator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -240,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return HomeWidget();
+                                                return ScreenNav();
                                               },
                                             ),
                                           );
