@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inmalang/user/screens/home.dart';
 import 'package:inmalang/user/screens/navigator.dart';
+import 'package:inmalang/user/screens/register.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -42,15 +43,15 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0,0,0,0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                     child: Container(
                       width: size.width * 0.6,
                       child: Image.asset("assets/image/logo.png"),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(size.width * 0.1,
-                        size.height * 0, size.width * 0.1, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(
+                        size.width * 0.1, size.height * 0, size.width * 0.1, 0),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -264,11 +265,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   3, 0, 0, 0),
-                                          child: Text('Buat akun',
-                                              style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Color(0xFF54A7CD),
-                                              )),
+                                          child: GestureDetector(
+                                            child: Text('Buat akun',
+                                                style: TextStyle(
+                                                  fontFamily: 'Poppins',
+                                                  color: Color(0xFF54A7CD),
+                                                )),
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) {
+                                                    return RegisterPage();
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ],
                                     ),
