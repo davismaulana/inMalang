@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inmalang/user/screens/home.dart';
+import 'package:inmalang/user/screens/wishlist.dart';
 
 class ScreenNav extends StatefulWidget {
   const ScreenNav({ Key? key }) : super(key: key);
@@ -15,7 +16,7 @@ class _ScreenNavState extends State<ScreenNav> {
   final tabs = [
     HomeWidget(),
     Center(child:Text("Trending")),
-    Center(child:Text("Widhlist"))
+    Wishlist()
   ];
 
   @override
