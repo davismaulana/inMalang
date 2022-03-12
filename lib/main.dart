@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inmalang/user/screens/login.dart';
+import 'package:inmalang/screens/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // is not restarted.
-        primarySwatch: Colors.lightGreen,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: LoginScreen()
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          // is not restarted.
+          primarySwatch: Colors.lightGreen,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const LoginScreen());
   }
 }

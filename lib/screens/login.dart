@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:inmalang/user/screens/home.dart';
-import 'package:inmalang/user/screens/navigator.dart';
-import 'package:inmalang/user/screens/register.dart';
+import 'package:inmalang/constant.dart';
+import 'package:inmalang/screens/navigator.dart';
+import 'package:inmalang/screens/register.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -31,20 +30,20 @@ class _LoginScreenState extends State<LoginScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF6FEEF),
+      backgroundColor: kBack,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
             child: SingleChildScrollView(
               padding: EdgeInsets.zero,
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    child: Container(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    child: SizedBox(
                       width: size.width * 0.6,
                       child: Image.asset("assets/image/logo.png"),
                     ),
@@ -55,10 +54,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 3,
-                            color: Color(0xFFCCCCCC),
+                            color: kShadow2,
                             offset: Offset(0, 0),
                             spreadRadius: 2,
                           )
@@ -76,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
-                                  color: Color(0xFF000105),
+                                  color: kTextLog,
                                   fontSize: size.width * 0.07,
                                 )),
                           ),
@@ -95,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.perm_identity,
                                         color: Colors.black,
                                         size: 24,
@@ -106,43 +105,40 @@ class _LoginScreenState extends State<LoginScreen> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   size.width * 0.03, 0, 0, 0),
                                           child: TextFormField(
-                                              controller: textController1,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Username',
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                            controller: textController1,
+                                            obscureText: false,
+                                            decoration: const InputDecoration(
+                                              labelText: 'Username',
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: kBorderSear,
+                                                  width: 1,
                                                 ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
                                                 ),
                                               ),
-                                              style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Colors.black,
-                                              )),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: kBorderSear,
+                                                  width: 1,
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                            ),
+                                            style: const TextStyle(
+                                              fontFamily: 'Poppins',
+                                              color: Colors.black,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -153,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.lock_outlined,
                                           color: Colors.black,
                                           size: 24,
@@ -169,13 +165,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                               decoration: InputDecoration(
                                                 labelText: 'Password',
                                                 enabledBorder:
-                                                    UnderlineInputBorder(
+                                                    const UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                    color: Color(0x00000000),
+                                                    color: kBorderSear,
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -183,13 +179,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   ),
                                                 ),
                                                 focusedBorder:
-                                                    UnderlineInputBorder(
+                                                    const UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                    color: Color(0x00000000),
+                                                    color: kBorderSear,
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -207,12 +203,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                                             .visibility_outlined
                                                         : Icons
                                                             .visibility_off_outlined,
-                                                    color: Color(0xFF757575),
+                                                    color: kIconCol,
                                                     size: 22,
                                                   ),
                                                 ),
                                               ),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontFamily: 'Poppins',
                                                 color: Colors.black,
                                               ),
@@ -236,13 +232,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20)),
-                                        child: Text("Login"),
+                                        child: const Text("Login"),
                                         onPressed: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return ScreenNav();
+                                                return const ScreenNav();
                                               },
                                             ),
                                           );
@@ -256,27 +252,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text('Tidak punya akun?',
-                                            style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.black,
-                                            )),
+                                        const Text(
+                                          'Tidak punya akun?',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Colors.black,
+                                          ),
+                                        ),
                                         Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  3, 0, 0, 0),
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(3, 0, 0, 0),
                                           child: GestureDetector(
-                                            child: Text('Buat akun',
+                                            child: const Text('Buat akun',
                                                 style: TextStyle(
                                                   fontFamily: 'Poppins',
-                                                  color: Color(0xFF54A7CD),
+                                                  color: kText,
                                                 )),
                                             onTap: () {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) {
-                                                    return RegisterPage();
+                                                    return const RegisterPage();
                                                   },
                                                 ),
                                               );

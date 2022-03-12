@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:inmalang/constant.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -26,7 +24,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF6FEEF),
+      backgroundColor: kBack,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -35,7 +33,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             scrollDirection: Axis.vertical,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                padding: const EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,26 +52,27 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                   ),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Hi, Wawan!',
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 18,
                               fontWeight: FontWeight.bold),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
                           child: Text(
                             'Kamu ingin mencari tempat wisata seperti apa?',
@@ -84,15 +83,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Color(0xFFEEEEEE),
+                              color: kSearch,
                               borderRadius: BorderRadius.circular(50),
                             ),
                             child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 0, 15, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  20, 0, 15, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -100,39 +100,39 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     child: TextFormField(
                                       controller: textController,
                                       obscureText: false,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         hintText: 'Cari',
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: kBorderSear,
                                             width: 1,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: kBorderSear,
                                             width: 1,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
                                       ),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: 'Poppins',
-                                        color: Color(0xFF7C7C7C),
+                                        color: kTextSear,
                                       ),
                                     ),
                                   ),
                                   GestureDetector(
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.search,
-                                      color: Color(0xFF7C7C7C),
+                                      color: kTextSear,
                                       size: 20,
                                     ),
                                     onTap: () {},
@@ -146,10 +146,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                           height: size.height * 0.27,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 blurRadius: 3,
-                                color: Color(0xFFC6C1C1),
+                                color: kShadow,
                                 spreadRadius: 1,
                               )
                             ],
@@ -171,7 +171,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: size.width * 0.04),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: size.width * 0.15,
                                             child: Column(
                                               children: [
@@ -193,7 +193,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         "assets/image/ferris-wheel.png"),
                                                   ),
                                                 ),
-                                                Text(
+                                                const Text(
                                                   "Hiburan",
                                                   style:
                                                       TextStyle(fontSize: 12),
@@ -205,7 +205,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: size.width * 0.04),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: size.width * 0.15,
                                             child: Column(
                                               children: [
@@ -227,7 +227,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         "assets/image/mortarboard.png"),
                                                   ),
                                                 ),
-                                                Text(
+                                                const Text(
                                                   "Edukasi",
                                                   style:
                                                       TextStyle(fontSize: 12),
@@ -239,7 +239,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: size.width * 0.04),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: size.width * 0.15,
                                             child: Column(
                                               children: [
@@ -261,7 +261,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         "assets/image/plant.png"),
                                                   ),
                                                 ),
-                                                Text(
+                                                const Text(
                                                   "Agrowisata",
                                                   style:
                                                       TextStyle(fontSize: 10),
@@ -270,7 +270,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             ),
                                           ),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: size.width * 0.15,
                                           child: Column(
                                             children: [
@@ -290,7 +290,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       "assets/image/pray.png"),
                                                 ),
                                               ),
-                                              Text(
+                                              const Text(
                                                 "Religi",
                                                 style: TextStyle(fontSize: 12),
                                               )
@@ -305,7 +305,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       Padding(
                                         padding: EdgeInsets.only(
                                             right: size.width * 0.04),
-                                        child: Container(
+                                        child: SizedBox(
                                           width: size.width * 0.15,
                                           child: Column(
                                             children: [
@@ -325,7 +325,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       "assets/image/parasol.png"),
                                                 ),
                                               ),
-                                              Text(
+                                              const Text(
                                                 "Pantai",
                                                 style: TextStyle(fontSize: 12),
                                               )
@@ -336,7 +336,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       Padding(
                                         padding: EdgeInsets.only(
                                             right: size.width * 0.04),
-                                        child: Container(
+                                        child: SizedBox(
                                           width: size.width * 0.15,
                                           child: Column(
                                             children: [
@@ -356,7 +356,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       "assets/image/mountain.png"),
                                                 ),
                                               ),
-                                              Text(
+                                              const Text(
                                                 "Gunung",
                                                 style: TextStyle(fontSize: 12),
                                               )
@@ -367,7 +367,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       Padding(
                                         padding: EdgeInsets.only(
                                             right: size.width * 0.04),
-                                        child: Container(
+                                        child: SizedBox(
                                           width: size.width * 0.15,
                                           child: Column(
                                             children: [
@@ -387,7 +387,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       "assets/image/wat-phra-kaew.png"),
                                                 ),
                                               ),
-                                              Text(
+                                              const Text(
                                                 "Sejarah",
                                                 style: TextStyle(fontSize: 10),
                                               )
@@ -395,7 +395,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           ),
                                         ),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: size.width * 0.15,
                                         child: Column(
                                           children: [
@@ -415,7 +415,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     "assets/image/fast-food.png"),
                                               ),
                                             ),
-                                            Text(
+                                            const Text(
                                               "Kuliner",
                                               style: TextStyle(fontSize: 12),
                                             )
@@ -427,7 +427,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ],
                               )),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 10),
                           child: Text(
                             'Rencana liburan anda!',
@@ -443,7 +443,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             aspectRatio: 16 / 9,
                             autoPlayCurve: Curves.fastOutSlowIn,
                             autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
+                                const Duration(milliseconds: 800),
                             enlargeCenterPage: true,
                             enableInfiniteScroll: true,
                             autoPlay: true,
@@ -451,40 +451,41 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ),
                           items: [
                             Container(
-                                margin: EdgeInsets.all(5),
-                                width: size.width * 1,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/image/pantai-teluk.jpg"),
-                                        fit: BoxFit.cover)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        "Pantai Teluk Asmara",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            shadows: [
-                                              Shadow(
-                                                offset: Offset(0, 0),
-                                                blurRadius: 5,
-                                                color: Color.fromARGB(
-                                                    255, 0, 0, 0),
-                                              ),
-                                            ]),
-                                      )
-                                    ],
-                                  ),
-                                ))
+                              margin: const EdgeInsets.all(5),
+                              width: size.width * 1,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: const DecorationImage(
+                                      image: AssetImage(
+                                          "assets/image/pantai-teluk.jpg"),
+                                      fit: BoxFit.cover)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: const [
+                                    Text(
+                                      "Pantai Teluk Asmara",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(0, 0),
+                                            blurRadius: 5,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 10),
                           child: Text(
                             'Destinasi Populer',
@@ -500,7 +501,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             aspectRatio: 16 / 9,
                             autoPlayCurve: Curves.fastOutSlowIn,
                             autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
+                                const Duration(milliseconds: 800),
                             enlargeCenterPage: true,
                             enableInfiniteScroll: true,
                             autoPlay: true,
@@ -508,11 +509,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ),
                           items: [
                             Container(
-                                margin: EdgeInsets.all(5),
+                                margin: const EdgeInsets.all(5),
                                 width: size.width * 1,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
+                                    image: const DecorationImage(
                                         image: AssetImage(
                                             "assets/image/pantai-teluk.jpg"),
                                         fit: BoxFit.cover)),
@@ -520,21 +521,22 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   padding: const EdgeInsets.all(10.0),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
+                                    children: const [
                                       Text(
                                         "Pantai Teluk Asmara",
                                         style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            shadows: [
-                                              Shadow(
-                                                offset: Offset(0, 0),
-                                                blurRadius: 5,
-                                                color: Color.fromARGB(
-                                                    255, 0, 0, 0),
-                                              ),
-                                            ]),
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                              offset: Offset(0, 0),
+                                              blurRadius: 5,
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
+                                            ),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),

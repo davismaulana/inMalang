@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:inmalang/constant.dart';
 
 class Header extends StatelessWidget {
   const Header({Key? key}) : super(key: key);
@@ -7,7 +7,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10, right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       height: 60,
       child: Row(
         children: [
@@ -15,16 +15,16 @@ class Header extends StatelessWidget {
             onPressed: () {},
             icon: const Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              color: kBorderSear,
               size: 30,
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 10),
-            child: Text(
+            margin: const EdgeInsets.only(left: 10),
+            child: const Text(
               'Whishlist',
               style: TextStyle(
-                  color: Colors.black,
+                  color: kBorderSear,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                   fontFamily: "Mulish "),

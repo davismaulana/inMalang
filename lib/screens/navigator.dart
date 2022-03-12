@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:inmalang/user/screens/home.dart';
-import 'package:inmalang/user/screens/wishlist.dart';
+import 'package:inmalang/screens/home.dart';
+import 'package:inmalang/screens/wishlist.dart';
 
 class ScreenNav extends StatefulWidget {
-  const ScreenNav({ Key? key }) : super(key: key);
+  const ScreenNav({Key? key}) : super(key: key);
 
   @override
   _ScreenNavState createState() => _ScreenNavState();
 }
 
 class _ScreenNavState extends State<ScreenNav> {
-
   int _currentIndex = 0;
 
-  final tabs = [
+  final tabs = const [
     HomeWidget(),
-    Center(child:Text("Trending")),
+    Center(child: Text("Trending")),
     Wishlist()
   ];
 
@@ -26,21 +25,21 @@ class _ScreenNavState extends State<ScreenNav> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text("Beranda"),
+            label: "Beranda",
           ),
-           BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.trending_up),
-            title: Text("Trending"),
+            label: "Trending",
           ),
-           BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.add_a_photo_rounded),
-            title: Text("Wishlist"),
+            label: "Wishlist",
           ),
         ],
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             _currentIndex = index;
           });

@@ -25,16 +25,16 @@ class Widgetlist extends StatelessWidget {
             color: Colors.grey.withOpacity(0.6),
             spreadRadius: 0,
             blurRadius: 5,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
-        borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(15),
-            topRight: const Radius.circular(15),
-            bottomLeft: const Radius.circular(15),
-            bottomRight: const Radius.circular(15)),
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+            bottomLeft: Radius.circular(15),
+            bottomRight: Radius.circular(15)),
       ),
-      margin: EdgeInsets.only(left: 15, right: 15, top: 25),
+      margin: const EdgeInsets.only(left: 15, right: 15, top: 25),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -54,10 +54,10 @@ class Widgetlist extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 5, top: 5, right: 5),
+                  margin: const EdgeInsets.only(left: 5, top: 5, right: 5),
                   child: Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Mulish',
                       fontSize: 18,
                       fontWeight: FontWeight.w900,
@@ -65,10 +65,10 @@ class Widgetlist extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 5, top: 5, right: 5),
+                  margin: const EdgeInsets.only(left: 5, top: 5, right: 5),
                   child: Text(
                     isi,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: 'Mulish',
                         fontSize: 11,
                         fontWeight: FontWeight.w500),
@@ -78,16 +78,16 @@ class Widgetlist extends StatelessWidget {
                 Container(
                   height: 40.0,
                   width: 282,
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     top: 6,
                   ),
                   child: Material(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: const Radius.circular(15)),
-                    color:  Theme.of(context).primaryColor,
+                    borderRadius: const BorderRadius.only(
+                        bottomRight: Radius.circular(15)),
+                    color: Theme.of(context).primaryColor,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary:  Theme.of(context).primaryColor,
+                        primary: Theme.of(context).primaryColor,
                       ),
                       onPressed: press,
                       child: Center(

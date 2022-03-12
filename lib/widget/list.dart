@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inmalang/user/screens/detail.dart';
+import '../screens/detail.dart';
 import 'widgetlist.dart';
 
 class ListItem extends StatelessWidget {
@@ -17,7 +17,7 @@ class ListItem extends StatelessWidget {
             image: "assets/image/IMG-20220223-WA0107 1.png",
             press: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (c) => Detail()));
+                  context, MaterialPageRoute(builder: (c) => const Detail()));
             },
           ),
           Widgetlist(
@@ -27,7 +27,7 @@ class ListItem extends StatelessWidget {
             image: "assets/image/IMG-20220223-WA0107 1.png",
             press: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (c) => Detail()));
+                  context, MaterialPageRoute(builder: (c) => const Detail()));
             },
           ),
           Widgetlist(
@@ -37,7 +37,7 @@ class ListItem extends StatelessWidget {
             image: "assets/image/IMG-20220223-WA0107 1.png",
             press: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (c) => Detail()));
+                  context, MaterialPageRoute(builder: (c) => const Detail()));
             },
           ),
           Widgetlist(
@@ -47,7 +47,7 @@ class ListItem extends StatelessWidget {
             image: "assets/image/IMG-20220223-WA0107 1.png",
             press: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (c) => Detail()));
+                  context, MaterialPageRoute(builder: (c) => const Detail()));
             },
           ),
           Widgetlist(
@@ -57,7 +57,7 @@ class ListItem extends StatelessWidget {
             image: "assets/image/IMG-20220223-WA0107 1.png",
             press: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (c) => Detail()));
+                  context, MaterialPageRoute(builder: (c) => const Detail()));
             },
           ),
         ],

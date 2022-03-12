@@ -15,13 +15,13 @@ class RegisterPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 30),
+              margin: const EdgeInsets.only(top: 30),
               width: size.width * 0.6,
               child: Image.asset(
-                'assets/image/logo.png', 
+                'assets/image/logo.png',
               ),
             ),
-            Shape(),
+            const Shape(),
           ],
         ),
       ),
