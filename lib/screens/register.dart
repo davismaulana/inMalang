@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inmalang/component/shape.dart';
+import 'package:inmalang/widget/shape.dart';
 import 'package:inmalang/constant.dart';
 
 class RegisterPage extends StatelessWidget {

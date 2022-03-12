@@ -24,10 +24,11 @@ class Header extends StatelessWidget {
             child: const Text(
               'Whishlist',
               style: TextStyle(
-                  color: kBorderSear,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: "Mulish "),
+                color: kBorderSear,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                fontFamily: "Mulish ",
+              ),
             ),
           )
         ],
