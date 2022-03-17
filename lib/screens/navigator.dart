@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inmalang/screens/home.dart';
+import 'package:inmalang/screens/trending.dart';
 import 'package:inmalang/screens/wishlist.dart';
 
 class ScreenNav extends StatefulWidget {
@@ -12,11 +13,7 @@ class ScreenNav extends StatefulWidget {
 class _ScreenNavState extends State<ScreenNav> {
   int _currentIndex = 0;
 
-  final tabs = const [
-    HomeWidget(),
-    Center(child: Text("Trending")),
-    Wishlist()
-  ];
+  final tabs = const [HomeWidget(), TrendingPage(), Wishlist()];
 
   @override
   Widget build(BuildContext context) {
