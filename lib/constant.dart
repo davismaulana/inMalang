@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-const kBack = Color(0xFFF6FFEF);
+const kBack = Color(0xFF7AA5AF);
 const kTfield = Color(0xFFF0F0F0);
-const kButton = Color(0xFFC0FFB0);
+const kButton = Color(0xFF7AA5AF);
 const fillColor = Color(0xFFE4E4E4);
 
 const kSearch = Color(0xFFEEEEEE);

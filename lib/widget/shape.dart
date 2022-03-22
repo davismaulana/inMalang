@@ -1,260 +1,430 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inmalang/constant.dart';
+import 'package:inmalang/screens/home.dart';
 
 import '../screens/navigator.dart';
 
-class Shape extends StatelessWidget {
+class Shape extends StatefulWidget {
   const Shape({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<Shape> createState() => _ShapeState();
+}
+
+class _ShapeState extends State<Shape> {
+  late bool passwordVisibility;
+  late bool _obs;
+  final _formkey = GlobalKey<FormState>();
+  bool showProgress = false;
+  bool visible = false;
+
+  final _auth = FirebaseAuth.instance;
+
+  late TextEditingController nameController = TextEditingController();
+  late TextEditingController emailController = TextEditingController();
+  late TextEditingController usernameController = TextEditingController();
+  late TextEditingController passwordController = TextEditingController();
+  late TextEditingController confirmpassController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // nameController = TextEditingController();
+    // emailController = TextEditingController();
+    // usernameController = TextEditingController();
+    // passwordController = TextEditingController();
+    // confirmpassController = TextEditingController();
+
+    passwordVisibility = false;
+    _obs = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 330,
-      height: 490,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-              color: Colors.grey.withOpacity(0.4),
-              // spreadRadius: 5,
-              blurRadius: 12.0,
-              offset: const Offset(4.0, 0.2))
-        ],
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Column(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(top: 25),
-              child: const Text(
-                'REGISTER',
-                style: TextStyle(
-                    fontFamily: 'Mulish',
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 25,
-                    decoration: TextDecoration.none),
-              ),
+    var size = MediaQuery.of(context).size;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(
+            size.width * 0.01, size.height * 0, size.width * 0.01, 0),
+        child: ClipRRect(
+          clipBehavior: Clip.hardEdge,
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            width: 330,
+            height: 533,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 3,
+                  color: kShadow2,
+                  offset: Offset(0, 0),
+                  spreadRadius: 2,
+                )
+              ],
+              borderRadius: BorderRadius.circular(20),
+              shape: BoxShape.rectangle,
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              margin: const EdgeInsets.only(top: 15),
-              child: const Text(
-                'Nama',
-                style: TextStyle(
-                    fontFamily: 'Mulish',
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                    decoration: TextDecoration.none),
-              ),
-            ),
-            Container(
-              height: 35,
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 5),
-              child: TextField(
-                decoration: InputDecoration(
-                  //  border: InputBorder.none,
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: kTfield),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  contentPadding: const EdgeInsets.only(
-                      top: 11, bottom: 0, left: 13, right: 13),
-                  fillColor: fillColor,
-                  filled: true,
-
-                  // hintText: 'EMAIL',
-                  // hintStyle: ,
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              margin: const EdgeInsets.only(top: 5),
-              child: const Text(
-                'Email',
-                style: TextStyle(
-                    fontFamily: 'Mulish',
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                    decoration: TextDecoration.none),
-              ),
-            ),
-            Container(
-              height: 35,
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 5),
-              child: TextField(
-                decoration: InputDecoration(
-                  //  border: InputBorder.none,
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: kTfield),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  contentPadding: const EdgeInsets.only(
-                      top: 11, bottom: 0, left: 13, right: 13),
-                  fillColor: fillColor,
-                  filled: true,
-
-                  // hintText: 'EMAIL',
-                  // hintStyle: ,
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              margin: const EdgeInsets.only(top: 5),
-              child: const Text(
-                'Username',
-                style: TextStyle(
-                    fontFamily: 'Mulish',
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                    decoration: TextDecoration.none),
-              ),
-            ),
-            Container(
-              height: 35,
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 5),
-              child: TextField(
-                decoration: InputDecoration(
-                  //  border: InputBorder.none,
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: kTfield),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  contentPadding: const EdgeInsets.only(
-                      top: 11, bottom: 0, left: 13, right: 13),
-                  fillColor: fillColor,
-                  filled: true,
-
-                  // hintText: 'EMAIL',
-                  // hintStyle: ,
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              margin: const EdgeInsets.only(top: 5),
-              child: const Text(
-                'Password',
-                style: TextStyle(
-                    fontFamily: 'Mulish',
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                    decoration: TextDecoration.none),
-              ),
-            ),
-            Container(
-              height: 35,
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 5),
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  //  border: InputBorder.none,
-                  suffixIcon: const Icon(Icons.visibility_off),
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: kTfield),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  contentPadding: const EdgeInsets.only(
-                      top: 11, bottom: 8, left: 13, right: 13),
-                  fillColor: fillColor,
-                  filled: true,
-
-                  // hintText: 'EMAIL',
-                  // hintStyle: ,
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              margin: const EdgeInsets.only(top: 5),
-              child: const Text(
-                'Ulangi Password',
-                style: TextStyle(
-                    fontFamily: 'Mulish',
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                    decoration: TextDecoration.none),
-              ),
-            ),
-            Container(
-              height: 35,
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 5),
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.visibility_off),
-                  //  border: InputBorder.none,
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: kTfield),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  contentPadding: const EdgeInsets.only(
-                      top: 11, bottom: 8, left: 13, right: 13),
-                  fillColor: fillColor,
-                  filled: true,
-
-                  // hintText: 'EMAIL',
-                  // hintStyle: ,
-                ),
-              ),
-            ),
-            Container(
-                height: 40.0,
-                width: 250,
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                margin: const EdgeInsets.only(
-                  top: 30,
-                ),
-                child: Material(
-                  borderRadius: BorderRadius.circular(40.0),
-                  color: kButton,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40.0))),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const ScreenNav();
-                          },
-                        ),
-                      );
-                    },
-                    child: const Center(
-                      child: Text(
-                        'Register ',
+            child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              body: Form(
+                key: _formkey,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.only(top: 25),
+                      child: const Text(
+                        'REGISTER',
                         style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Mulish'),
+                            fontFamily: 'Mulish',
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 25,
+                            decoration: TextDecoration.none),
                       ),
                     ),
-                  ),
-                )),
-          ],
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      margin: const EdgeInsets.only(top: 17),
+                      child: const Text(
+                        'Nama',
+                        style: TextStyle(
+                            fontFamily: 'Mulish',
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17,
+                            decoration: TextDecoration.none),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      margin:
+                          const EdgeInsets.only(left: 30, right: 30, top: 5),
+                      child: TextFormField(
+                        controller: nameController,
+                        autofocus: false,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.transparent, width: 2.0),
+                              borderRadius: BorderRadius.circular(17.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.transparent, width: 2.0),
+                              borderRadius: BorderRadius.circular(17.0),
+                            ),
+                            border: InputBorder.none,
+                            contentPadding:
+                                const EdgeInsets.only(left: 13, right: 13),
+                            fillColor: fillColor,
+                            filled: true,
+                            hintText: 'Nama'),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      margin: const EdgeInsets.only(top: 5),
+                      child: const Text(
+                        'Email',
+                        style: TextStyle(
+                            fontFamily: 'Mulish',
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17,
+                            decoration: TextDecoration.none),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      margin:
+                          const EdgeInsets.only(left: 30, right: 30, top: 5),
+                      child: TextFormField(
+                        controller: emailController,
+                        autofocus: false,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.transparent, width: 2.0),
+                            borderRadius: BorderRadius.circular(17.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.transparent, width: 2.0),
+                            borderRadius: BorderRadius.circular(17.0),
+                          ),
+                          border: InputBorder.none,
+                          contentPadding:
+                              const EdgeInsets.only(left: 13, right: 13),
+                          fillColor: fillColor,
+                          filled: true,
+                          hintText: 'Email',
+                        ),
+                        validator: (value) {
+                          if (value!.length == 0) {
+                            return "Email cannot be empty";
+                          }
+                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                              .hasMatch(value)) {
+                            return ("Please enter a valid email");
+                          } else {
+                            return null;
+                          }
+                        },
+                        onChanged: (value) {},
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      margin: const EdgeInsets.only(top: 5),
+                      child: const Text(
+                        'Username',
+                        style: TextStyle(
+                            fontFamily: 'Mulish',
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17,
+                            decoration: TextDecoration.none),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      margin:
+                          const EdgeInsets.only(left: 30, right: 30, top: 5),
+                      child: TextFormField(
+                        controller: usernameController,
+                        autofocus: false,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.transparent, width: 2.0),
+                              borderRadius: BorderRadius.circular(17.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.transparent, width: 2.0),
+                              borderRadius: BorderRadius.circular(17.0),
+                            ),
+                            border: InputBorder.none,
+                            contentPadding:
+                                const EdgeInsets.only(left: 13, right: 13),
+                            fillColor: fillColor,
+                            filled: true,
+                            hintText: 'Username'),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      margin: const EdgeInsets.only(top: 5),
+                      child: const Text(
+                        'Password',
+                        style: TextStyle(
+                            fontFamily: 'Mulish',
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17,
+                            decoration: TextDecoration.none),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      margin:
+                          const EdgeInsets.only(left: 30, right: 30, top: 5),
+                      child: TextFormField(
+                        controller: passwordController,
+                        autofocus: false,
+                        obscureText: !passwordVisibility,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.transparent, width: 2.0),
+                            borderRadius: BorderRadius.circular(17.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.transparent, width: 2.0),
+                            borderRadius: BorderRadius.circular(17.0),
+                          ),
+                          border: InputBorder.none,
+                          contentPadding:
+                              const EdgeInsets.only(left: 13, right: 13),
+                          fillColor: fillColor,
+                          filled: true,
+                          hintText: 'Password',
+                          suffixIcon: InkWell(
+                            onTap: () => setState(
+                              () => passwordVisibility = !passwordVisibility,
+                            ),
+                            child: Icon(
+                              passwordVisibility
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                              color: kIconCol,
+                              size: 22,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          RegExp regex = new RegExp(r'^.{6,}$');
+                          if (value!.isEmpty) {
+                            return "Password cannot be empty";
+                          }
+                          if (!regex.hasMatch(value)) {
+                            return ("please enter valid password min. 6 character");
+                          } else {
+                            return null;
+                          }
+                        },
+                        onChanged: (value) {},
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      margin: const EdgeInsets.only(top: 5),
+                      child: const Text(
+                        'Ulangi Password',
+                        style: TextStyle(
+                            fontFamily: 'Mulish',
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17,
+                            decoration: TextDecoration.none),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      margin:
+                          const EdgeInsets.only(left: 30, right: 30, top: 5),
+                      child: TextFormField(
+                        autofocus: false,
+                        obscureText: !_obs,
+                        controller: confirmpassController,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.transparent, width: 2.0),
+                            borderRadius: BorderRadius.circular(17.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.transparent, width: 2.0),
+                            borderRadius: BorderRadius.circular(17.0),
+                          ),
+                          border: InputBorder.none,
+                          contentPadding:
+                              const EdgeInsets.only(left: 13, right: 13),
+                          fillColor: fillColor,
+                          filled: true,
+                          hintText: 'Ulangi Password',
+                          suffixIcon: InkWell(
+                            onTap: () => setState(
+                              () => _obs = !_obs,
+                            ),
+                            child: Icon(
+                              _obs
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                              color: kIconCol,
+                              size: 22,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (confirmpassController.text !=
+                              passwordController.text) {
+                            return "Password tidak sama";
+                          } else {
+                            return null;
+                          }
+                        },
+                        onChanged: (value) {},
+                        keyboardType: TextInputType.visiblePassword,
+                      ),
+                    ),
+                    Container(
+                        height: 45.0,
+                        width: 450,
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        margin: const EdgeInsets.only(
+                          top: 30,
+                        ),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(42.0),
+                          color: kButton,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: kButton,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(42.0))),
+                            onPressed: () {
+                              setState(() {
+                                showProgress = true;
+                              });
+                              signUp(
+                                emailController.text,
+                                passwordController.text,
+                              );
+                            },
+                            child: const Center(
+                              child: Text(
+                                'Register ',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Mulish'),
+                              ),
+                            ),
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
+  }
+
+  signUp(String email, String password) async {
+    if (_formkey.currentState!.validate()) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+              email: email,
+              password: password,
+            )
+            .whenComplete(() => {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ScreenNav(),
+                    ),
+                  )
+                });
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+
+    CircularProgressIndicator();
   }
 }

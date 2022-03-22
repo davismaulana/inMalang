@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inmalang/constant.dart';
+import 'package:inmalang/screens/home.dart';
 import 'package:inmalang/screens/navigator.dart';
 import 'package:inmalang/screens/register.dart';
 
@@ -11,19 +13,26 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late TextEditingController textController1;
-  late TextEditingController textController2;
+  bool visible = false;
   late bool passwordVisibility;
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  final _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
     passwordVisibility = false;
   }
+
+  // void dispose() {
+  //   usernameController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 size.width * 0.08,
                                 size.height * 0.05),
                             child: Form(
-                              key: formKey,
+                              key: _formKey,
                               autovalidateMode: AutovalidateMode.disabled,
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -94,50 +103,97 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      const Icon(
-                                        Icons.perm_identity,
-                                        color: Colors.black,
-                                        size: 24,
+                                      Container(
+                                        margin: const EdgeInsets.only(top: 23),
+                                        child: const Icon(
+                                          Icons.perm_identity,
+                                          color: Colors.black,
+                                          size: 29,
+                                        ),
                                       ),
                                       Expanded(
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   size.width * 0.03, 0, 0, 0),
-                                          child: TextFormField(
-                                            controller: textController1,
-                                            obscureText: false,
-                                            decoration: const InputDecoration(
-                                              labelText: 'Username',
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: kBorderSear,
-                                                  width: 1,
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: kBorderSear,
-                                                  width: 1,
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                alignment: Alignment.topLeft,
+                                                padding: const EdgeInsets.only(
+                                                    left: 5,
+                                                    right: 30,
+                                                    bottom: 3),
+                                                child: const Text(
+                                                  'Email',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Mulish',
+                                                    color: Colors.black87,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 15,
+                                                    decoration:
+                                                        TextDecoration.none,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            style: const TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.black,
-                                            ),
+                                              SizedBox(
+                                                height: 42,
+                                                child: TextFormField(
+                                                  controller: emailController,
+                                                  autofocus: false,
+                                                  decoration: InputDecoration(
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              width: 2.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              17.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              width: 2.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              17.0),
+                                                    ),
+                                                    border: InputBorder.none,
+                                                    contentPadding:
+                                                        const EdgeInsets.only(
+                                                            left: 13,
+                                                            right: 13),
+                                                    fillColor: fillColor,
+                                                    filled: true,
+                                                    hintText: 'Email',
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value!.length == 0) {
+                                                      return "Email cannot be empty";
+                                                    }
+                                                    if (!RegExp(
+                                                            "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                                        .hasMatch(value)) {
+                                                      return ("Please enter a valid email");
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  onSaved: (value) {
+                                                    emailController.text =
+                                                        value!;
+                                                  },
+                                                  keyboardType: TextInputType
+                                                      .emailAddress,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
@@ -145,76 +201,111 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, size.height * 0.01, 0, 0),
+                                        0, size.height * 0.015, 0, 0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        const Icon(
-                                          Icons.lock_outlined,
-                                          color: Colors.black,
-                                          size: 24,
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(top: 20),
+                                          child: const Icon(
+                                            Icons.lock_outlined,
+                                            color: Colors.black,
+                                            size: 29,
+                                          ),
                                         ),
                                         Expanded(
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     size.width * 0.03, 0, 0, 0),
-                                            child: TextFormField(
-                                              controller: textController2,
-                                              obscureText: !passwordVisibility,
-                                              decoration: InputDecoration(
-                                                labelText: 'Password',
-                                                enabledBorder:
-                                                    const UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: kBorderSear,
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                                focusedBorder:
-                                                    const UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: kBorderSear,
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.topLeft,
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5,
+                                                          right: 30,
+                                                          bottom: 3),
+                                                  child: const Text(
+                                                    'Password',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Mulish',
+                                                      color: Colors.black87,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 15,
+                                                      decoration:
+                                                          TextDecoration.none,
+                                                    ),
                                                   ),
                                                 ),
-                                                suffixIcon: InkWell(
-                                                  onTap: () => setState(
-                                                    () => passwordVisibility =
+                                                SizedBox(
+                                                  height: 42,
+                                                  child: TextFormField(
+                                                    controller:
+                                                        passwordController,
+                                                    autofocus: false,
+                                                    obscureText:
                                                         !passwordVisibility,
-                                                  ),
-                                                  child: Icon(
-                                                    passwordVisibility
-                                                        ? Icons
-                                                            .visibility_outlined
-                                                        : Icons
-                                                            .visibility_off_outlined,
-                                                    color: kIconCol,
-                                                    size: 22,
+                                                    decoration: InputDecoration(
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide:
+                                                            const BorderSide(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                width: 2.0),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(17.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide:
+                                                            const BorderSide(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                width: 2.0),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(17.0),
+                                                      ),
+                                                      border: InputBorder.none,
+                                                      contentPadding:
+                                                          const EdgeInsets.only(
+                                                              left: 13,
+                                                              right: 13),
+                                                      fillColor: fillColor,
+                                                      filled: true,
+                                                      hintText: 'Password ',
+                                                      suffixIcon: InkWell(
+                                                        onTap: () => setState(
+                                                          () => passwordVisibility =
+                                                              !passwordVisibility,
+                                                        ),
+                                                        child: Icon(
+                                                          passwordVisibility
+                                                              ? Icons
+                                                                  .visibility_outlined
+                                                              : Icons
+                                                                  .visibility_off_outlined,
+                                                          color: kIconCol,
+                                                          size: 22,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    keyboardType: TextInputType
+                                                        .visiblePassword,
+                                                    validator: (value) {},
+                                                    onSaved: (value) {
+                                                      // passwordController.text =
+                                                      //     value!;
+                                                    },
                                                   ),
                                                 ),
-                                              ),
-                                              style: const TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Colors.black,
-                                              ),
-                                              textAlign: TextAlign.start,
-                                              keyboardType:
-                                                  TextInputType.visiblePassword,
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -222,28 +313,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, size.width * 0.08, 0, 0),
-                                      child: MaterialButton(
-                                        height: size.height * 0.06,
-                                        minWidth: size.width * 0.5,
-                                        color: Theme.of(context).primaryColor,
-                                        textColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: const Text("Login"),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return const ScreenNav();
-                                              },
-                                            ),
-                                          );
-                                        },
-                                      )),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, size.width * 0.09, 0, 0),
+                                    child: MaterialButton(
+                                      height: size.height * 0.06,
+                                      minWidth: size.width * 0.6,
+                                      color: kButton,
+                                      textColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: const Text("Login"),
+                                      onPressed: () {
+                                        setState(() {
+                                          visible = true;
+                                        });
+                                        signIn(emailController.text,
+                                            passwordController.text);
+                                      },
+                                    ),
+                                  ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, size.height * 0.01, 0, 0),
@@ -298,5 +387,29 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void signIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ScreenNav(),
+          ),
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          print('No user found for that email.');
+        } else if (e.code == 'wrong-password') {
+          print('Wrong password provided for that user.');
+        }
+      }
+    }
   }
 }

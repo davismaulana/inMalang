@@ -9,6 +9,7 @@ class TrendingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
           HeaderTrending(),
           BodyTrending(),

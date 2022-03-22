@@ -14,9 +14,9 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(top: 30),
-              width: size.width * 0.6,
+            SizedBox(
+              // margin: const EdgeInsets.only(top: 10),
+              width: size.width * 0.5,
               child: Image.asset(
                 'assets/image/logo.png',
               ),

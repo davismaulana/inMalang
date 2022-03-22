@@ -40,19 +40,23 @@ class _HomeWidgetState extends State<HomeWidget> {
                   children: [
                     Image.asset(
                       "assets/image/logo.png",
-                      width: size.width * 0.25,
+                      width: size.width * 0.19,
                     ),
-                    Image.network(
-                      'https://picsum.photos/seed/637/600',
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
+                    // Image.network(
+                    //   'https://picsum.photos/seed/637/600',
+                    //   width: 60,
+                    //   height: 60,
+                    //   fit: BoxFit.cover,
+                    // ),
                   ],
                 ),
               ),
               Container(
                 decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15.0),
+                    topLeft: Radius.circular(15.0),
+                  ),
                   color: Colors.white,
                 ),
                 child: Column(
@@ -61,7 +65,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 15, 10, 10),
                       child: Text(
                         'Hi, Wawan!',
                         style: TextStyle(
@@ -71,7 +75,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 15, 10, 10),
                       child: Text(
                         'Kamu ingin mencari tempat wisata seperti apa?',
                         style: TextStyle(
@@ -82,7 +86,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
+                          const EdgeInsetsDirectional.fromSTEB(20, 10, 20, 20),
                       child: Container(
                         decoration: BoxDecoration(
                           color: kSearch,
