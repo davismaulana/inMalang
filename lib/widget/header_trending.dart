@@ -6,30 +6,43 @@ class HeaderTrending extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 10, right: 10),
-      color: kButton,
-      height: 60,
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 30,
-            ),
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          color: kButton,
+          height: 80,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: const Text(
+                  'Trending',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "Mulish "),
+                ),
+              )
+            ],
           ),
-          const Text(
-            'Trending',
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                fontFamily: "Mulish "),
-          )
-        ],
-      ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20,20,20,10),
+          child: const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Mari kita lihat apa yang\ntrending hari ini! 🔥',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+        ),
+      ],
     );
   }
 }

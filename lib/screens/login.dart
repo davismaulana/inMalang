@@ -392,7 +392,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
-        UserCredential userCredential =
+
+        UserCredential userCredential = 
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
@@ -400,7 +401,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const ScreenNav(),
+            builder: (context) =>  ScreenNav(user: userCredential.user!,),
           ),
         );
       } on FirebaseAuthException catch (e) {

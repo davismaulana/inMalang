@@ -1,9 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:inmalang/constant.dart';
 
 class HomeWidget extends StatefulWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+  final String username;
+
+  HomeWidget({required this.username});
 
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
@@ -12,6 +16,7 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   late TextEditingController textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final ref = FirebaseFirestore.instance.collection('wisata');
 
   @override
   void initState() {
@@ -64,10 +69,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 15, 10, 10),
                       child: Text(
-                        'Hi, Wawan!',
+                        'Hi,' + widget.username,
                         style: TextStyle(
                             fontFamily: 'Mulish',
                             fontSize: 18,
@@ -433,54 +438,72 @@ class _HomeWidgetState extends State<HomeWidget> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    CarouselSlider(
-                      options: CarouselOptions(
-                        height: 180,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 800),
-                        enlargeCenterPage: true,
-                        enableInfiniteScroll: true,
-                        autoPlay: true,
-                        viewportFraction: 0.8,
-                      ),
-                      items: [
-                        Container(
-                          margin: const EdgeInsets.all(5),
-                          width: size.width * 1,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      "assets/image/pantai-teluk.jpg"),
-                                  fit: BoxFit.cover)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                Text(
-                                  "Pantai Teluk Asmara",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    shadows: [
-                                      Shadow(
-                                        offset: Offset(0, 0),
-                                        blurRadius: 5,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
+
+                    StreamBuilder(
+                        stream: ref.snapshots(),
+                        builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
+                          if (snap.hasError) {
+                            return Text(snap.error.toString());
+                          }
+                          if (snap.connectionState == ConnectionState.waiting) {
+                            return CircularProgressIndicator();
+                          }
+
+                          return CarouselSlider.builder(
+                            itemCount:
+                                snap.hasData ? snap.data!.docs.length : 0,
+                            itemBuilder: (_, index, int) {
+                              return Container(
+                                margin: const EdgeInsets.all(5),
+                                width: size.width * 1,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                        image: NetworkImage(snap
+                                            .data!.docs[index]
+                                            .get('image')),
+                                        fit: BoxFit.cover)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        snap.data!.docs[index].get('nama'),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                              offset: Offset(0, 0),
+                                              blurRadius: 5,
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
+                                            ),
+                                          ],
+                                        ),
+                                      )
                                     ],
                                   ),
-                                )
-                              ],
+                                ),
+                              );
+                            },
+                            options: CarouselOptions(
+                              height: 180,
+                              aspectRatio: 16 / 9,
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              autoPlayAnimationDuration:
+                                  const Duration(milliseconds: 800),
+                              enlargeCenterPage: true,
+                              enableInfiniteScroll: false,
+                              autoPlay: true,
+                              viewportFraction: 0.8,
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
+                          );
+                        }),
+
+                    // Destinasi popoler
                     const Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(10, 30, 10, 10),
                       child: Text(
@@ -491,53 +514,69 @@ class _HomeWidgetState extends State<HomeWidget> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    CarouselSlider(
-                      options: CarouselOptions(
-                        height: 180,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 800),
-                        enlargeCenterPage: true,
-                        enableInfiniteScroll: true,
-                        autoPlay: true,
-                        viewportFraction: 0.8,
-                      ),
-                      items: [
-                        Container(
-                            margin: const EdgeInsets.all(5),
-                            width: size.width * 1,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: const DecorationImage(
-                                    image: AssetImage(
-                                        "assets/image/pantai-teluk.jpg"),
-                                    fit: BoxFit.cover)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: const [
-                                  Text(
-                                    "Pantai Teluk Asmara",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      shadows: [
-                                        Shadow(
-                                          offset: Offset(0, 0),
-                                          blurRadius: 5,
-                                          color: Color.fromARGB(255, 0, 0, 0),
+                    StreamBuilder(
+                        stream: ref.snapshots(),
+                        builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
+                          if (snap.hasError) {
+                            return Text(snap.error.toString());
+                          }
+                          if (snap.connectionState == ConnectionState.waiting) {
+                            return CircularProgressIndicator();
+                          }
+
+                          return CarouselSlider.builder(
+                            itemCount:
+                                snap.hasData ? snap.data!.docs.length : 0,
+                            itemBuilder: (_, index, int) {
+                              return Container(
+                                margin: const EdgeInsets.all(5),
+                                width: size.width * 1,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                        image: NetworkImage(snap
+                                            .data!.docs[index]
+                                            .get('image')),
+                                        fit: BoxFit.cover)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        snap.data!.docs[index].get('nama'),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                              offset: Offset(0, 0),
+                                              blurRadius: 5,
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ))
-                      ],
-                    ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            options: CarouselOptions(
+                              height: 180,
+                              aspectRatio: 16 / 9,
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              autoPlayAnimationDuration:
+                                  const Duration(milliseconds: 800),
+                              enlargeCenterPage: true,
+                              enableInfiniteScroll: false,
+                              autoPlay: true,
+                              viewportFraction: 0.8,
+                            ),
+                          );
+                        }),
                   ],
                 ),
               ),

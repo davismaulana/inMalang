@@ -75,32 +75,24 @@ class Widgetlist extends StatelessWidget {
                     maxLines: 4,
                   ),
                 ),
-                Container(
-                  height: 40.0,
-                  width: 282,
-                  margin: const EdgeInsets.only(
-                    top: 6,
-                  ),
-                  child: Material(
-                    borderRadius: const BorderRadius.only(
-                        bottomRight: Radius.circular(15)),
-                    color: Theme.of(context).primaryColor,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).primaryColor,
-                      ),
-                      onPressed: press,
-                      child: Center(
-                        child: Text(
-                          'Rincian',
-                          style: TextStyle(
-                              color: Colors.grey[800],
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Mulish',
-                              fontSize: 14),
-                        ),
-                      ),
+                TextButton(
+                  child: Text(
+                    "Rincian",
+                    style: TextStyle(
+                      color: Colors.white
                     ),
+                  ),
+                  onPressed: press,
+                  style: ButtonStyle(
+                    fixedSize: MaterialStateProperty.all<Size>(Size(size.width * 0.72, size.height *0.06)),
+                    backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(15)
+                        ),
+                      )
+                    )
                   ),
                 ),
               ],

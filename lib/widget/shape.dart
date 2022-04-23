@@ -401,19 +401,19 @@ class _ShapeState extends State<Shape> {
   signUp(String email, String password) async {
     if (_formkey.currentState!.validate()) {
       try {
-        UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-              email: email,
-              password: password,
-            )
-            .whenComplete(() => {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const ScreenNav(),
-                    ),
-                  )
-                });
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ScreenNav(
+              user: userCredential.user!,
+            ),
+          ),
+        );
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           print('The password provided is too weak.');
