@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/detail.dart';
+import 'package:inmalang/screens/user/detail.dart';
 import 'widgetlist.dart';
 
 class ListItem extends StatelessWidget {

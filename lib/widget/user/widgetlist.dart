@@ -76,24 +76,21 @@ class Widgetlist extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  child: Text(
+                  child: const Text(
                     "Rincian",
-                    style: TextStyle(
-                      color: Colors.white
-                    ),
+                    style: TextStyle(color: Colors.white),
                   ),
                   onPressed: press,
                   style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all<Size>(Size(size.width * 0.72, size.height *0.06)),
-                    backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(15)
-                        ),
-                      )
-                    )
-                  ),
+                      fixedSize: MaterialStateProperty.all<Size>(
+                          Size(size.width * 0.72, size.height * 0.06)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).primaryColor),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.only(bottomRight: Radius.circular(15)),
+                      ))),
                 ),
               ],
             ),

@@ -1,13 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:inmalang/constant.dart';
 
 class HomeWidget extends StatefulWidget {
   final String username;
 
-  HomeWidget({required this.username});
+  const HomeWidget({required this.username});
 
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
@@ -70,10 +69,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 15, 10, 10),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(20, 15, 10, 10),
                       child: Text(
                         'Hi,' + widget.username,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontFamily: 'Mulish',
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
@@ -446,7 +446,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                             return Text(snap.error.toString());
                           }
                           if (snap.connectionState == ConnectionState.waiting) {
-                            return CircularProgressIndicator();
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
 
                           return CarouselSlider.builder(
@@ -470,7 +471,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     children: [
                                       Text(
                                         snap.data!.docs[index].get('nama'),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
@@ -521,7 +522,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                             return Text(snap.error.toString());
                           }
                           if (snap.connectionState == ConnectionState.waiting) {
-                            return CircularProgressIndicator();
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
 
                           return CarouselSlider.builder(
@@ -545,7 +547,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     children: [
                                       Text(
                                         snap.data!.docs[index].get('nama'),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
