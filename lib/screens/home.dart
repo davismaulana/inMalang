@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inmalang/constant.dart';
+import 'package:inmalang/screens/kategory.dart';
 
 class HomeWidget extends StatefulWidget {
   final String username;
@@ -89,66 +90,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20, 10, 20, 20),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: kSearch,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              20, 0, 15, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: TextFormField(
-                                  controller: textController,
-                                  obscureText: false,
-                                  decoration: const InputDecoration(
-                                    hintText: 'Cari',
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: kBorderSear,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: kBorderSear,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                  ),
-                                  style: const TextStyle(
-                                    fontFamily: 'Mulish',
-                                    color: kTextSear,
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                child: const Icon(
-                                  Icons.search,
-                                  color: kTextSear,
-                                  size: 20,
-                                ),
-                                onTap: () {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
@@ -178,249 +120,351 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       bottom: size.height * 0.02),
                                   child: Row(
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            right: size.width * 0.04),
-                                        child: SizedBox(
-                                          width: size.width * 0.15,
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: size.width * 0.15,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Theme.of(context)
-                                                            .primaryColor),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50)),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: Image.asset(
-                                                      "assets/image/ferris-wheel.png"),
+                                      GestureDetector(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              right: size.width * 0.04),
+                                          child: SizedBox(
+                                            width: size.width * 0.15,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: size.width * 0.15,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Theme.of(context)
+                                                              .primaryColor),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50)),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(2.0),
+                                                    child: Image.asset(
+                                                        "assets/image/ferris-wheel.png"),
+                                                  ),
                                                 ),
-                                              ),
-                                              const Text(
-                                                "Hiburan",
-                                                style: TextStyle(fontSize: 12),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            right: size.width * 0.04),
-                                        child: SizedBox(
-                                          width: size.width * 0.15,
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: size.width * 0.15,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Theme.of(context)
-                                                            .primaryColor),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50)),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: Image.asset(
-                                                      "assets/image/mortarboard.png"),
-                                                ),
-                                              ),
-                                              const Text(
-                                                "Edukasi",
-                                                style: TextStyle(fontSize: 12),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            right: size.width * 0.04),
-                                        child: SizedBox(
-                                          width: size.width * 0.15,
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: size.width * 0.15,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Theme.of(context)
-                                                            .primaryColor),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50)),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: Image.asset(
-                                                      "assets/image/plant.png"),
-                                                ),
-                                              ),
-                                              const Text(
-                                                "Agrowisata",
-                                                style: TextStyle(fontSize: 10),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: size.width * 0.15,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              width: size.width * 0.15,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Theme.of(context)
-                                                          .primaryColor),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50)),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: Image.asset(
-                                                    "assets/image/pray.png"),
-                                              ),
+                                                const Text(
+                                                  "Hiburan",
+                                                  style: TextStyle(fontSize: 12),
+                                                )
+                                              ],
                                             ),
-                                            const Text(
-                                              "Religi",
-                                              style: TextStyle(fontSize: 12),
-                                            )
-                                          ],
+                                          ),
                                         ),
+                                        onTap: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return KategoryScreen(Kategory: "Hiburan",);
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      ),
+
+                                      GestureDetector(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              right: size.width * 0.04),
+                                          child: SizedBox(
+                                            width: size.width * 0.15,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: size.width * 0.15,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Theme.of(context)
+                                                              .primaryColor),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50)),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(2.0),
+                                                    child: Image.asset(
+                                                        "assets/image/mortarboard.png"),
+                                                  ),
+                                                ),
+                                                const Text(
+                                                  "Edukasi",
+                                                  style: TextStyle(fontSize: 12),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        onTap: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return KategoryScreen(Kategory: "Edukasi",);
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      ),
+
+                                      GestureDetector(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              right: size.width * 0.04),
+                                          child: SizedBox(
+                                            width: size.width * 0.15,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: size.width * 0.15,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Theme.of(context)
+                                                              .primaryColor),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50)),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(2.0),
+                                                    child: Image.asset(
+                                                        "assets/image/plant.png"),
+                                                  ),
+                                                ),
+                                                const Text(
+                                                  "Agrowisata",
+                                                  style: TextStyle(fontSize: 10),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        onTap: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return KategoryScreen(Kategory: "Agrowisata",);
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      ),
+
+                                      GestureDetector(
+                                        child: SizedBox(
+                                          width: size.width * 0.15,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                width: size.width * 0.15,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Image.asset(
+                                                      "assets/image/pray.png"),
+                                                ),
+                                              ),
+                                              const Text(
+                                                "Religi",
+                                                style: TextStyle(fontSize: 12),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        onTap: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return KategoryScreen(Kategory: "Religi",);
+                                              },
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),
                                 ),
                                 Row(
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          right: size.width * 0.04),
-                                      child: SizedBox(
-                                        width: size.width * 0.15,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              width: size.width * 0.15,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Theme.of(context)
-                                                          .primaryColor),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50)),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: Image.asset(
-                                                    "assets/image/parasol.png"),
+                                    GestureDetector(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            right: size.width * 0.04),
+                                        child: SizedBox(
+                                          width: size.width * 0.15,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                width: size.width * 0.15,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Image.asset(
+                                                      "assets/image/parasol.png"),
+                                                ),
                                               ),
-                                            ),
-                                            const Text(
-                                              "Pantai",
-                                              style: TextStyle(fontSize: 12),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          right: size.width * 0.04),
-                                      child: SizedBox(
-                                        width: size.width * 0.15,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              width: size.width * 0.15,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Theme.of(context)
-                                                          .primaryColor),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50)),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: Image.asset(
-                                                    "assets/image/mountain.png"),
-                                              ),
-                                            ),
-                                            const Text(
-                                              "Gunung",
-                                              style: TextStyle(fontSize: 12),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          right: size.width * 0.04),
-                                      child: SizedBox(
-                                        width: size.width * 0.15,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              width: size.width * 0.15,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Theme.of(context)
-                                                          .primaryColor),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50)),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: Image.asset(
-                                                    "assets/image/wat-phra-kaew.png"),
-                                              ),
-                                            ),
-                                            const Text(
-                                              "Sejarah",
-                                              style: TextStyle(fontSize: 10),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.15,
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            width: size.width * 0.15,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Theme.of(context)
-                                                        .primaryColor),
-                                                borderRadius:
-                                                    BorderRadius.circular(50)),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: Image.asset(
-                                                  "assets/image/fast-food.png"),
-                                            ),
+                                              const Text(
+                                                "Pantai",
+                                                style: TextStyle(fontSize: 12),
+                                              )
+                                            ],
                                           ),
-                                          const Text(
-                                            "Kuliner",
-                                            style: TextStyle(fontSize: 12),
-                                          )
-                                        ],
+                                        ),
                                       ),
+                                      onTap: (){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return KategoryScreen(Kategory: "Pantai",);
+                                              },
+                                            ),
+                                          );
+                                      },
+                                    ),
+
+                                    GestureDetector(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            right: size.width * 0.04),
+                                        child: SizedBox(
+                                          width: size.width * 0.15,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                width: size.width * 0.15,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Image.asset(
+                                                      "assets/image/mountain.png"),
+                                                ),
+                                              ),
+                                              const Text(
+                                                "Gunung",
+                                                style: TextStyle(fontSize: 12),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      onTap: (){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return KategoryScreen(Kategory: "Gunung",);
+                                              },
+                                            ),
+                                          );
+                                      },
+                                    ),
+
+                                    GestureDetector(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            right: size.width * 0.04),
+                                        child: SizedBox(
+                                          width: size.width * 0.15,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                width: size.width * 0.15,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Image.asset(
+                                                      "assets/image/wat-phra-kaew.png"),
+                                                ),
+                                              ),
+                                              const Text(
+                                                "Sejarah",
+                                                style: TextStyle(fontSize: 10),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      onTap: (){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return KategoryScreen(Kategory: "Sejarah",);
+                                              },
+                                            ),
+                                          );
+                                      },
+                                    ),
+
+                                    GestureDetector(
+                                      child: SizedBox(
+                                        width: size.width * 0.15,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              width: size.width * 0.15,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Theme.of(context)
+                                                          .primaryColor),
+                                                  borderRadius:
+                                                      BorderRadius.circular(50)),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
+                                                child: Image.asset(
+                                                    "assets/image/fast-food.png"),
+                                              ),
+                                            ),
+                                            const Text(
+                                              "Kuliner",
+                                              style: TextStyle(fontSize: 12),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      onTap: (){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return KategoryScreen(Kategory: "Kuliner",);
+                                              },
+                                            ),
+                                          );
+                                      },
                                     ),
                                   ],
                                 ),
@@ -446,7 +490,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             return Text(snap.error.toString());
                           }
                           if (snap.connectionState == ConnectionState.waiting) {
-                            return CircularProgressIndicator();
+                            return Center(child: CircularProgressIndicator());
                           }
 
                           return CarouselSlider.builder(
@@ -521,7 +565,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             return Text(snap.error.toString());
                           }
                           if (snap.connectionState == ConnectionState.waiting) {
-                            return CircularProgressIndicator();
+                            return Center(child: CircularProgressIndicator());
                           }
 
                           return CarouselSlider.builder(
