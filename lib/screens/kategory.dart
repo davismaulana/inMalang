@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:inmalang/screens/detail.dart';
+import 'package:inmalang/screens/user/detail.dart';
 
 class KategoryScreen extends StatefulWidget {
   const KategoryScreen({Key? key, required this.Kategory}) : super(key: key);
