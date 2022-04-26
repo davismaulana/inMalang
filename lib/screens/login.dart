@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inmalang/constant.dart';
-import 'package:inmalang/screens/home.dart';
-import 'package:inmalang/screens/navigator.dart';
+import 'package:inmalang/helpers/helperauth.dart';
 import 'package:inmalang/screens/register.dart';
+import 'package:inmalang/screens/user/navigator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -27,12 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     passwordVisibility = false;
   }
-
-  // void dispose() {
-  //   usernameController.dispose();
-  //   passwordController.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -324,12 +318,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                           borderRadius:
                                               BorderRadius.circular(20)),
                                       child: const Text("Login"),
-                                      onPressed: () {
+                                      onPressed: () async {
                                         setState(() {
                                           visible = true;
                                         });
-                                        signIn(emailController.text,
-                                            passwordController.text);
+                                        if (emailController.text.isEmpty ||
+                                            passwordController.text.isEmpty) {
+                                          print(
+                                              "Email and password cannot be empty");
+                                          return;
+                                        }
+                                        try {
+                                          final user =
+                                              await AuthHelper.signInWithEmail(
+                                                  email: emailController.text,
+                                                  password:
+                                                      passwordController.text);
+                                          if (user != null) {
+                                            print("login successful");
+                                          }
+                                        } catch (e) {
+                                          print(e);
+                                        }
                                       },
                                     ),
                                   ),
@@ -392,8 +402,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
-
-        UserCredential userCredential = 
+        UserCredential userCredential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
@@ -401,7 +410,9 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) =>  ScreenNav(user: userCredential.user!,),
+            builder: (context) => ScreenNav(
+              user: userCredential.user!,
+            ),
           ),
         );
       } on FirebaseAuthException catch (e) {

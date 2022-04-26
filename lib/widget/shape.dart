@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inmalang/constant.dart';
-import 'package:inmalang/screens/home.dart';
-
-import '../screens/navigator.dart';
+import 'package:inmalang/helpers/helperauth.dart';
 
 class Shape extends StatefulWidget {
   const Shape({
@@ -275,7 +273,7 @@ class _ShapeState extends State<Shape> {
                           ),
                         ),
                         validator: (value) {
-                          RegExp regex = new RegExp(r'^.{6,}$');
+                          RegExp regex = RegExp(r'^.{6,}$');
                           if (value!.isEmpty) {
                             return "Password cannot be empty";
                           }
@@ -367,14 +365,32 @@ class _ShapeState extends State<Shape> {
                                 primary: kButton,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(42.0))),
-                            onPressed: () {
+                            onPressed: () async {
                               setState(() {
                                 showProgress = true;
                               });
-                              signUp(
-                                emailController.text,
-                                passwordController.text,
-                              );
+                              if (emailController.text.isEmpty ||
+                                  passwordController.text.isEmpty) {
+                                print("Email and password cannot be empty");
+                                return;
+                              }
+                              if (confirmpassController.text.isEmpty ||
+                                  passwordController.text !=
+                                      confirmpassController.text) {
+                                print("confirm password does not match");
+                                return;
+                              }
+                              try {
+                                final user = await AuthHelper.signupWithEmail(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                                if (user != null) {
+                                  print("signup successful");
+                                  Navigator.pop(context);
+                                }
+                              } catch (e) {
+                                print(e);
+                              }
                             },
                             child: const Center(
                               child: Text(
@@ -396,35 +412,5 @@ class _ShapeState extends State<Shape> {
         ),
       ),
     );
-  }
-
-  signUp(String email, String password) async {
-    if (_formkey.currentState!.validate()) {
-      try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => ScreenNav(
-              user: userCredential.user!,
-            ),
-          ),
-        );
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
-        } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
-        }
-      } catch (e) {
-        print(e);
-      }
-    }
-
-    CircularProgressIndicator();
   }
 }
