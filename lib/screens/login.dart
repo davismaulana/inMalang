@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inmalang/constant.dart';
-import 'package:inmalang/helpers/helperauth.dart';
 import 'package:inmalang/screens/register.dart';
 import 'package:inmalang/screens/user/navigator.dart';
 
@@ -17,8 +16,8 @@ class _LoginScreenState extends State<LoginScreen> {
   late bool passwordVisibility;
   final _formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  String? emailController = "";
+  String? passwordController = "";
 
   final _auth = FirebaseAuth.instance;
 
@@ -133,7 +132,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                               SizedBox(
                                                 height: 42,
                                                 child: TextFormField(
-                                                  controller: emailController,
+                                                  onChanged: (value) {
+                                                    emailController =
+                                                        value.toString().trim();
+                                                  },
                                                   autofocus: false,
                                                   decoration: InputDecoration(
                                                     enabledBorder:
@@ -180,8 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     }
                                                   },
                                                   onSaved: (value) {
-                                                    emailController.text =
-                                                        value!;
+                                                    emailController = value!;
                                                   },
                                                   keyboardType: TextInputType
                                                       .emailAddress,
@@ -238,8 +239,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 SizedBox(
                                                   height: 42,
                                                   child: TextFormField(
-                                                    controller:
-                                                        passwordController,
+                                                    onChanged: (value) {
+                                                      passwordController =
+                                                          value;
+                                                    },
                                                     autofocus: false,
                                                     obscureText:
                                                         !passwordVisibility,
@@ -292,7 +295,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     ),
                                                     keyboardType: TextInputType
                                                         .visiblePassword,
-                                                    validator: (value) {},
                                                     onSaved: (value) {
                                                       // passwordController.text =
                                                       //     value!;
@@ -317,27 +319,47 @@ class _LoginScreenState extends State<LoginScreen> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20)),
-                                      child: const Text("Login"),
+                                      child: const Text(
+                                        "Login",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Mullish'),
+                                      ),
                                       onPressed: () async {
                                         setState(() {
                                           visible = true;
                                         });
-                                        if (emailController.text.isEmpty ||
-                                            passwordController.text.isEmpty) {
-                                          print(
-                                              "Email and password cannot be empty");
-                                          return;
-                                        }
                                         try {
-                                          final user =
-                                              await AuthHelper.signInWithEmail(
-                                                  email: emailController.text,
-                                                  password:
-                                                      passwordController.text);
-                                          if (user != null) {
-                                            print("login successful");
-                                          }
-                                        } catch (e) {
+                                          final userCredential = await _auth
+                                              .signInWithEmailAndPassword(
+                                                  email: emailController
+                                                      .toString(),
+                                                  password: passwordController
+                                                      .toString());
+                                          await Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (contex) => ScreenNav(
+                                                user: userCredential.user!,
+                                              ),
+                                            ),
+                                          );
+                                        } on FirebaseAuthException catch (e) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                              title: const Text(
+                                                  "Ops! Login Failed"),
+                                              content: Text('${e.message}'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(ctx).pop();
+                                                  },
+                                                  child: const Text('Okay'),
+                                                )
+                                              ],
+                                            ),
+                                          );
                                           print(e);
                                         }
                                       },
@@ -397,31 +419,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  void signIn(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ScreenNav(
-              user: userCredential.user!,
-            ),
-          ),
-        );
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
-          print('No user found for that email.');
-        } else if (e.code == 'wrong-password') {
-          print('Wrong password provided for that user.');
-        }
-      }
-    }
   }
 }

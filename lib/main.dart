@@ -1,8 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:inmalang/helpers/helperauth.dart';
 import 'package:inmalang/screens/login.dart';
 
 Future<void> main() async {
@@ -20,9 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'inMalang',
         theme: ThemeData(
-          // is not restarted.
-          primarySwatch: Colors.lightGreen,
-        ),
+            // is not restarted.
+            primaryColor: Colors.lightGreen),
         debugShowCheckedModeBanner: false,
         home: const LoginScreen());
   }

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inmalang/constant.dart';
-import 'package:inmalang/helpers/helperauth.dart';
+import 'package:inmalang/screens/user/navigator.dart';
 
 class Shape extends StatefulWidget {
   const Shape({
@@ -21,11 +21,11 @@ class _ShapeState extends State<Shape> {
 
   final _auth = FirebaseAuth.instance;
 
-  late TextEditingController nameController = TextEditingController();
-  late TextEditingController emailController = TextEditingController();
-  late TextEditingController usernameController = TextEditingController();
-  late TextEditingController passwordController = TextEditingController();
-  late TextEditingController confirmpassController = TextEditingController();
+  String nameController = "";
+  String emailController = "";
+  String usernameController = "";
+  String passwordController = "";
+  String confirmpassController = "";
 
   @override
   void initState() {
@@ -105,7 +105,9 @@ class _ShapeState extends State<Shape> {
                       margin:
                           const EdgeInsets.only(left: 30, right: 30, top: 5),
                       child: TextFormField(
-                        controller: nameController,
+                        onChanged: (value) {
+                          nameController = value.toString().trim();
+                        },
                         autofocus: false,
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
@@ -145,7 +147,9 @@ class _ShapeState extends State<Shape> {
                       margin:
                           const EdgeInsets.only(left: 30, right: 30, top: 5),
                       child: TextFormField(
-                        controller: emailController,
+                        onChanged: (value) {
+                          emailController = value.toString().trim();
+                        },
                         autofocus: false,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -176,7 +180,6 @@ class _ShapeState extends State<Shape> {
                             return null;
                           }
                         },
-                        onChanged: (value) {},
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
@@ -199,7 +202,9 @@ class _ShapeState extends State<Shape> {
                       margin:
                           const EdgeInsets.only(left: 30, right: 30, top: 5),
                       child: TextFormField(
-                        controller: usernameController,
+                        onChanged: (value) {
+                          usernameController = value.toString().trim();
+                        },
                         autofocus: false,
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
@@ -239,7 +244,9 @@ class _ShapeState extends State<Shape> {
                       margin:
                           const EdgeInsets.only(left: 30, right: 30, top: 5),
                       child: TextFormField(
-                        controller: passwordController,
+                        onChanged: (value) {
+                          passwordController = value.toString().trim();
+                        },
                         autofocus: false,
                         obscureText: !passwordVisibility,
                         decoration: InputDecoration(
@@ -283,7 +290,6 @@ class _ShapeState extends State<Shape> {
                             return null;
                           }
                         },
-                        onChanged: (value) {},
                       ),
                     ),
                     Container(
@@ -305,9 +311,11 @@ class _ShapeState extends State<Shape> {
                       margin:
                           const EdgeInsets.only(left: 30, right: 30, top: 5),
                       child: TextFormField(
+                        onChanged: (value) {
+                          confirmpassController = value.toString().trim();
+                        },
                         autofocus: false,
                         obscureText: !_obs,
-                        controller: confirmpassController,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
@@ -339,14 +347,12 @@ class _ShapeState extends State<Shape> {
                           ),
                         ),
                         validator: (value) {
-                          if (confirmpassController.text !=
-                              passwordController.text) {
+                          if (confirmpassController != passwordController) {
                             return "Password tidak sama";
                           } else {
                             return null;
                           }
                         },
-                        onChanged: (value) {},
                         keyboardType: TextInputType.visiblePassword,
                       ),
                     ),
@@ -369,27 +375,44 @@ class _ShapeState extends State<Shape> {
                               setState(() {
                                 showProgress = true;
                               });
-                              if (emailController.text.isEmpty ||
-                                  passwordController.text.isEmpty) {
-                                print("Email and password cannot be empty");
-                                return;
-                              }
-                              if (confirmpassController.text.isEmpty ||
-                                  passwordController.text !=
-                                      confirmpassController.text) {
-                                print("confirm password does not match");
-                                return;
-                              }
                               try {
-                                final user = await AuthHelper.signupWithEmail(
-                                    email: emailController.text,
-                                    password: passwordController.text);
-                                if (user != null) {
-                                  print("signup successful");
-                                  Navigator.pop(context);
-                                }
-                              } catch (e) {
-                                print(e);
+                                final credentialUser =
+                                    await _auth.createUserWithEmailAndPassword(
+                                        email: emailController,
+                                        password: passwordController);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor: Colors.blueGrey,
+                                    content: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                          'Sucessfully Register.You Can Login Now'),
+                                    ),
+                                    duration: Duration(seconds: 5),
+                                  ),
+                                );
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ScreenNav(
+                                            user: credentialUser.user!)));
+                              } on FirebaseAuthException catch (e) {
+                                showDialog(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title:
+                                        const Text(' Ops! Registration Failed'),
+                                    content: Text('${e.message}'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(ctx).pop();
+                                        },
+                                        child: const Text('Okay'),
+                                      )
+                                    ],
+                                  ),
+                                );
                               }
                             },
                             child: const Center(
