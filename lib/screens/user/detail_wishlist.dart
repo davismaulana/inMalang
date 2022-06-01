@@ -1,23 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:inmalang/screens/user/wishlist.dart';
-import 'package:provider/provider.dart';
 
-class DetailScreen extends StatefulWidget {
-  DetailScreen({Key? key, required this.snapData, required this.user})
-      : super(key: key);
+class DetailWishlist extends StatefulWidget {
+  
+  DetailWishlist({ Key? key,  required this.snapData }) : super(key: key);
   DocumentSnapshot snapData;
-  final User user;
 
   @override
-  State<DetailScreen> createState() => _DetailScreenState();
+  State<DetailWishlist> createState() => _DetailWishlistState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class _DetailWishlistState extends State<DetailWishlist> {
   final ref = FirebaseFirestore.instance.collection('wisata');
-  CollectionReference wishlist =
-      FirebaseFirestore.instance.collection('wishlist');
 
   @override
   Widget build(BuildContext context) {
@@ -119,30 +113,6 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        backgroundColor: Colors.green,
-        foregroundColor: Colors.white,
-        onPressed: () => {
-          wishlist.add({
-            'nama': widget.snapData.get("nama"),
-            'lokasi': widget.snapData.get("lokasi"),
-            'waktu': widget.snapData.get("waktu"),
-            'desc': widget.snapData.get("desc"),
-            'image': widget.snapData.get("image"),
-            'id_user': widget.user.uid,
-          }).whenComplete(() => ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.green,
-                  content: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Sucessfully Add to Wishlist'),
-                  ),
-                  duration: Duration(seconds: 5),
-                ),
-              ))
-        },
       ),
     );
   }

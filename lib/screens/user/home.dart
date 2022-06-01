@@ -1,13 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inmalang/constant.dart';
 import 'package:inmalang/screens/kategory.dart';
 
-class HomeWidget extends StatefulWidget {
-  final String username;
+import 'detail.dart';
 
-  const HomeWidget({required this.username});
+class HomeWidget extends StatefulWidget {
+  final User user;
+
+  const HomeWidget({required this.user});
 
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
@@ -17,6 +20,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   late TextEditingController textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final ref = FirebaseFirestore.instance.collection('wisata');
+  final users = FirebaseFirestore.instance.collection('users');
 
   @override
   void initState() {
@@ -73,12 +77,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20, 15, 10, 10),
                       child: Text(
-                        'Hi,' + widget.username,
+                        'Welcome to InMalang',
                         style: const TextStyle(
                             fontFamily: 'Mulish',
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ),
+                      //
                     ),
                     const Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 15, 10, 10),
@@ -90,7 +95,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    
+
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
@@ -132,38 +137,42 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   width: size.width * 0.15,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
-                                                          color: Theme.of(context)
+                                                          color: Theme.of(
+                                                                  context)
                                                               .primaryColor),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50)),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(2.0),
+                                                        const EdgeInsets.all(
+                                                            2.0),
                                                     child: Image.asset(
                                                         "assets/image/ferris-wheel.png"),
                                                   ),
                                                 ),
                                                 const Text(
                                                   "Hiburan",
-                                                  style: TextStyle(fontSize: 12),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 )
                                               ],
                                             ),
                                           ),
                                         ),
-                                        onTap: (){
+                                        onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return KategoryScreen(Kategory: "Hiburan",);
+                                                return KategoryScreen(
+                                                    Kategory: "Hiburan",
+                                                    user: widget.user);
                                               },
                                             ),
                                           );
                                         },
                                       ),
-
                                       GestureDetector(
                                         child: Padding(
                                           padding: EdgeInsets.only(
@@ -176,38 +185,42 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   width: size.width * 0.15,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
-                                                          color: Theme.of(context)
+                                                          color: Theme.of(
+                                                                  context)
                                                               .primaryColor),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50)),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(2.0),
+                                                        const EdgeInsets.all(
+                                                            2.0),
                                                     child: Image.asset(
                                                         "assets/image/mortarboard.png"),
                                                   ),
                                                 ),
                                                 const Text(
                                                   "Edukasi",
-                                                  style: TextStyle(fontSize: 12),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 )
                                               ],
                                             ),
                                           ),
                                         ),
-                                        onTap: (){
+                                        onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return KategoryScreen(Kategory: "Edukasi",);
+                                                return KategoryScreen(
+                                                    Kategory: "Edukasi",
+                                                    user: widget.user);
                                               },
                                             ),
                                           );
                                         },
                                       ),
-
                                       GestureDetector(
                                         child: Padding(
                                           padding: EdgeInsets.only(
@@ -220,38 +233,42 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   width: size.width * 0.15,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
-                                                          color: Theme.of(context)
+                                                          color: Theme.of(
+                                                                  context)
                                                               .primaryColor),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50)),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(2.0),
+                                                        const EdgeInsets.all(
+                                                            2.0),
                                                     child: Image.asset(
                                                         "assets/image/plant.png"),
                                                   ),
                                                 ),
                                                 const Text(
                                                   "Agrowisata",
-                                                  style: TextStyle(fontSize: 10),
+                                                  style:
+                                                      TextStyle(fontSize: 10),
                                                 )
                                               ],
                                             ),
                                           ),
                                         ),
-                                        onTap: (){
+                                        onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return KategoryScreen(Kategory: "Agrowisata",);
+                                                return KategoryScreen(
+                                                    Kategory: "Agrowisata",
+                                                    user: widget.user);
                                               },
                                             ),
                                           );
                                         },
                                       ),
-
                                       GestureDetector(
                                         child: SizedBox(
                                           width: size.width * 0.15,
@@ -280,12 +297,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             ],
                                           ),
                                         ),
-                                        onTap: (){
+                                        onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return KategoryScreen(Kategory: "Religi",);
+                                                return KategoryScreen(
+                                                    Kategory: "Religi",
+                                                    user: widget.user);
                                               },
                                             ),
                                           );
@@ -328,18 +347,19 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           ),
                                         ),
                                       ),
-                                      onTap: (){
+                                      onTap: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return KategoryScreen(Kategory: "Pantai",);
-                                              },
-                                            ),
-                                          );
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return KategoryScreen(
+                                                  Kategory: "Pantai",
+                                                  user: widget.user);
+                                            },
+                                          ),
+                                        );
                                       },
                                     ),
-
                                     GestureDetector(
                                       child: Padding(
                                         padding: EdgeInsets.only(
@@ -372,18 +392,19 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           ),
                                         ),
                                       ),
-                                      onTap: (){
+                                      onTap: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return KategoryScreen(Kategory: "Gunung",);
-                                              },
-                                            ),
-                                          );
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return KategoryScreen(
+                                                  Kategory: "Gunung",
+                                                  user: widget.user);
+                                            },
+                                          ),
+                                        );
                                       },
                                     ),
-
                                     GestureDetector(
                                       child: Padding(
                                         padding: EdgeInsets.only(
@@ -416,18 +437,20 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           ),
                                         ),
                                       ),
-                                      onTap: (){
+                                      onTap: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return KategoryScreen(Kategory: "Sejarah",);
-                                              },
-                                            ),
-                                          );
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return KategoryScreen(
+                                                Kategory: "Sejarah",
+                                                user: widget.user,
+                                              );
+                                            },
+                                          ),
+                                        );
                                       },
                                     ),
-
                                     GestureDetector(
                                       child: SizedBox(
                                         width: size.width * 0.15,
@@ -440,7 +463,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       color: Theme.of(context)
                                                           .primaryColor),
                                                   borderRadius:
-                                                      BorderRadius.circular(50)),
+                                                      BorderRadius.circular(
+                                                          50)),
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(2.0),
@@ -455,15 +479,17 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           ],
                                         ),
                                       ),
-                                      onTap: (){
+                                      onTap: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return KategoryScreen(Kategory: "Kuliner",);
-                                              },
-                                            ),
-                                          );
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return KategoryScreen(
+                                                  Kategory: "Kuliner",
+                                                  user: widget.user);
+                                            },
+                                          ),
+                                        );
                                       },
                                     ),
                                   ],
@@ -497,38 +523,53 @@ class _HomeWidgetState extends State<HomeWidget> {
                             itemCount:
                                 snap.hasData ? snap.data!.docs.length : 0,
                             itemBuilder: (_, index, int) {
-                              return Container(
-                                margin: const EdgeInsets.all(5),
-                                width: size.width * 1,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                        image: NetworkImage(snap
-                                            .data!.docs[index]
-                                            .get('image')),
-                                        fit: BoxFit.cover)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        snap.data!.docs[index].get('nama'),
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          shadows: [
-                                            Shadow(
-                                              offset: Offset(0, 0),
-                                              blurRadius: 5,
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return DetailScreen(
+                                          snapData: snap.data!.docs[index],
+                                          user: widget.user,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(5),
+                                  width: size.width * 1,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                          image: NetworkImage(snap
+                                              .data!.docs[index]
+                                              .get('image')),
+                                          fit: BoxFit.cover)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          snap.data!.docs[index].get('nama'),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            shadows: [
+                                              Shadow(
+                                                offset: Offset(0, 0),
+                                                blurRadius: 5,
+                                                color: Color.fromARGB(
+                                                    255, 0, 0, 0),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
@@ -572,38 +613,53 @@ class _HomeWidgetState extends State<HomeWidget> {
                             itemCount:
                                 snap.hasData ? snap.data!.docs.length : 0,
                             itemBuilder: (_, index, int) {
-                              return Container(
-                                margin: const EdgeInsets.all(5),
-                                width: size.width * 1,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                        image: NetworkImage(snap
-                                            .data!.docs[index]
-                                            .get('image')),
-                                        fit: BoxFit.cover)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        snap.data!.docs[index].get('nama'),
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          shadows: [
-                                            Shadow(
-                                              offset: Offset(0, 0),
-                                              blurRadius: 5,
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return DetailScreen(
+                                          snapData: snap.data!.docs[index],
+                                          user: widget.user,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(5),
+                                  width: size.width * 1,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                          image: NetworkImage(snap
+                                              .data!.docs[index]
+                                              .get('image')),
+                                          fit: BoxFit.cover)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          snap.data!.docs[index].get('nama'),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            shadows: [
+                                              Shadow(
+                                                offset: Offset(0, 0),
+                                                blurRadius: 5,
+                                                color: Color.fromARGB(
+                                                    255, 0, 0, 0),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );

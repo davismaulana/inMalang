@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:inmalang/screens/login.dart';
 import 'package:inmalang/screens/user/home.dart';
-import 'package:inmalang/screens/user/trending.dart';
+import 'package:inmalang/screens/user/profile.dart';
 import 'package:inmalang/screens/user/wishlist.dart';
+import 'package:provider/provider.dart';
+
+import '../../auth_services.dart';
 
 class ScreenNav extends StatefulWidget {
   final User user;
@@ -15,13 +20,13 @@ class ScreenNav extends StatefulWidget {
 
 class _ScreenNavState extends State<ScreenNav> {
   int _currentIndex = 0;
-
+  
   late final tabs = [
     HomeWidget(
-      username: '${widget.user.email}',
+      user: widget.user,
     ),
-    const TrendingPage(),
-    const Wishlist()
+    Wishlist(user: widget.user,),
+    const Profile(),
   ];
 
   @override
@@ -36,13 +41,14 @@ class _ScreenNavState extends State<ScreenNav> {
             icon: Icon(Icons.home),
             label: "Beranda",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.trending_up),
-            label: "Trending",
-          ),
+          
           BottomNavigationBarItem(
             icon: Icon(Icons.add_a_photo_rounded),
             label: "Wishlist",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.logout),
+            label: "Logout",
           ),
         ],
         onTap: (index) {

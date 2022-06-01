@@ -1,25 +1,34 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:inmalang/auth_services.dart';
 import 'package:inmalang/screens/login.dart';
+import 'package:inmalang/wrapper.dart';
+import 'package:provider/provider.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'inMalang',
-        theme: ThemeData(
-            // is not restarted.
-            primaryColor: Colors.lightGreen),
+    return StreamProvider.value(
+      value: AuthServices.firebaseUserStream,
+      initialData: null,
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const LoginScreen());
+        title: "InMalang",
+        theme: ThemeData(
+        // is not restarted.
+        primaryColor: Colors.lightGreen),
+        home: Wrapper(),
+      ),
+    );
   }
 }

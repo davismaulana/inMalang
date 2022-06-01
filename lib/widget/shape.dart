@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inmalang/constant.dart';
@@ -18,10 +19,9 @@ class _ShapeState extends State<Shape> {
   final _formkey = GlobalKey<FormState>();
   bool showProgress = false;
   bool visible = false;
-
+ 
   final _auth = FirebaseAuth.instance;
 
-  String nameController = "";
   String emailController = "";
   String usernameController = "";
   String passwordController = "";
@@ -35,14 +35,14 @@ class _ShapeState extends State<Shape> {
     // usernameController = TextEditingController();
     // passwordController = TextEditingController();
     // confirmpassController = TextEditingController();
-
-    passwordVisibility = false;
+    passwordVisibility = false; 
     _obs = false;
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Padding(
@@ -75,7 +75,7 @@ class _ShapeState extends State<Shape> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      margin: const EdgeInsets.only(top: 25),
+                      margin: const EdgeInsets.symmetric(vertical: 25),
                       child: const Text(
                         'REGISTER',
                         style: TextStyle(
@@ -86,12 +86,13 @@ class _ShapeState extends State<Shape> {
                             decoration: TextDecoration.none),
                       ),
                     ),
+
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.only(left: 30, right: 30),
-                      margin: const EdgeInsets.only(top: 17),
+                      margin: const EdgeInsets.only(top: 5),
                       child: const Text(
-                        'Nama',
+                        'Username',
                         style: TextStyle(
                             fontFamily: 'Mulish',
                             color: Colors.black87,
@@ -103,10 +104,10 @@ class _ShapeState extends State<Shape> {
                     Container(
                       height: 42,
                       margin:
-                          const EdgeInsets.only(left: 30, right: 30, top: 5),
+                          const EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 10),
                       child: TextFormField(
                         onChanged: (value) {
-                          nameController = value.toString().trim();
+                          usernameController = value.toString().trim();
                         },
                         autofocus: false,
                         decoration: InputDecoration(
@@ -125,9 +126,10 @@ class _ShapeState extends State<Shape> {
                                 const EdgeInsets.only(left: 13, right: 13),
                             fillColor: fillColor,
                             filled: true,
-                            hintText: 'Nama'),
+                            hintText: 'Username'),
                       ),
                     ),
+
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.only(left: 30, right: 30),
@@ -145,7 +147,7 @@ class _ShapeState extends State<Shape> {
                     Container(
                       height: 42,
                       margin:
-                          const EdgeInsets.only(left: 30, right: 30, top: 5),
+                          const EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 10),
                       child: TextFormField(
                         onChanged: (value) {
                           emailController = value.toString().trim();
@@ -183,48 +185,7 @@ class _ShapeState extends State<Shape> {
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.only(left: 30, right: 30),
-                      margin: const EdgeInsets.only(top: 5),
-                      child: const Text(
-                        'Username',
-                        style: TextStyle(
-                            fontFamily: 'Mulish',
-                            color: Colors.black87,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 17,
-                            decoration: TextDecoration.none),
-                      ),
-                    ),
-                    Container(
-                      height: 42,
-                      margin:
-                          const EdgeInsets.only(left: 30, right: 30, top: 5),
-                      child: TextFormField(
-                        onChanged: (value) {
-                          usernameController = value.toString().trim();
-                        },
-                        autofocus: false,
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent, width: 2.0),
-                              borderRadius: BorderRadius.circular(17.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent, width: 2.0),
-                              borderRadius: BorderRadius.circular(17.0),
-                            ),
-                            border: InputBorder.none,
-                            contentPadding:
-                                const EdgeInsets.only(left: 13, right: 13),
-                            fillColor: fillColor,
-                            filled: true,
-                            hintText: 'Username'),
-                      ),
-                    ),
+                    
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.only(left: 30, right: 30),
@@ -242,7 +203,7 @@ class _ShapeState extends State<Shape> {
                     Container(
                       height: 42,
                       margin:
-                          const EdgeInsets.only(left: 30, right: 30, top: 5),
+                          const EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 10),
                       child: TextFormField(
                         onChanged: (value) {
                           passwordController = value.toString().trim();
@@ -309,7 +270,7 @@ class _ShapeState extends State<Shape> {
                     Container(
                       height: 42,
                       margin:
-                          const EdgeInsets.only(left: 30, right: 30, top: 5),
+                          const EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 10),
                       child: TextFormField(
                         onChanged: (value) {
                           confirmpassController = value.toString().trim();
@@ -375,45 +336,7 @@ class _ShapeState extends State<Shape> {
                               setState(() {
                                 showProgress = true;
                               });
-                              try {
-                                final credentialUser =
-                                    await _auth.createUserWithEmailAndPassword(
-                                        email: emailController,
-                                        password: passwordController);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    backgroundColor: Colors.blueGrey,
-                                    content: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                          'Sucessfully Register.You Can Login Now'),
-                                    ),
-                                    duration: Duration(seconds: 5),
-                                  ),
-                                );
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ScreenNav(
-                                            user: credentialUser.user!)));
-                              } on FirebaseAuthException catch (e) {
-                                showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title:
-                                        const Text(' Ops! Registration Failed'),
-                                    content: Text('${e.message}'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(ctx).pop();
-                                        },
-                                        child: const Text('Okay'),
-                                      )
-                                    ],
-                                  ),
-                                );
-                              }
+                              register();
                             },
                             child: const Center(
                               child: Text(
@@ -435,5 +358,52 @@ class _ShapeState extends State<Shape> {
         ),
       ),
     );
+  }
+
+  void register() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+    try {
+      final credentialUser = await _auth.createUserWithEmailAndPassword(
+          email: emailController, password: passwordController);
+      users.add({
+        'id' : credentialUser.user!.uid,
+        'username' : usernameController,
+        'email' : emailController,
+        'password' : passwordController,
+      });
+      
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.blueGrey,
+          content: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Sucessfully Register'),
+          ),
+          duration: Duration(seconds: 5),
+        ),
+      );
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ScreenNav(user: credentialUser.user!)));
+    } on FirebaseAuthException catch (e) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text(' Ops! Registration Failed'),
+          content: Text('${e.message}'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: const Text('Okay'),
+            )
+          ],
+        ),
+      );
+    }
   }
 }

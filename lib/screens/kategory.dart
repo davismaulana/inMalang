@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inmalang/screens/user/detail.dart';
 
 class KategoryScreen extends StatefulWidget {
-  const KategoryScreen({Key? key, required this.Kategory}) : super(key: key);
+  const KategoryScreen({Key? key, required this.Kategory, required this.user}) : super(key: key);
 
   final String Kategory;
+  final User user;
 
   @override
   State<KategoryScreen> createState() => _KategoryScreenState();
@@ -67,7 +69,7 @@ class _KategoryScreenState extends State<KategoryScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return DetailScreen(snapData: snap.data!.docs[index],);
+                                          return DetailScreen(snapData: snap.data!.docs[index], user: widget.user);
                                         },
                                       ),
                                     );
